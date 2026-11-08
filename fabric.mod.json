@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "funtime_auto",
+  "version": "${version}",
+  "name": "FunTime AutoEnchanter",
+  "description": "Automatic pickaxe enchantment assistant",
+  "authors": ["TimeVisuals"],
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "com.funtime.auto.FunTimeAutoEnchanter"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
