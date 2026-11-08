@@ -1,3 +1,4 @@
+
 package com.funtime.auto;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -18,10 +19,10 @@ public class FunTimeAutoEnchanter implements ClientModInitializer {
 
         toggleKey = KeyBindingHelper.registerKeyBinding(
             new KeyBinding(
-                "FunTime AutoEnchanter: Включить/выключить",
+                "key.funtime_auto.toggle",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_F6,
-                KeyBinding.Category.MISC
+                "category.funtime_auto"
             )
         );
 
