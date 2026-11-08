@@ -1,33 +1,32 @@
-name: Build AutoEnchanter
+plugins {
+    id 'fabric-loom' version '1.9-SNAPSHOT'
+}
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+version = '1.0.0'
+group = 'com.funtime.auto'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+base {
+    archivesName = 'FunTime-AutoEnchanter'
+}
 
-    steps:
-      - name: Download source
-        uses: actions/checkout@v4
+repositories {
+    mavenCentral()
+}
 
-      - name: Install Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '21'
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.4'
+    mappings 'net.fabricmc:yarn:1.21.4+build.8:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.16.10'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.119.2+1.21.4'
+}
 
-      - name: Build mod
-        uses: gradle/actions/setup-gradle@v4
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
 
-      - name: Compile
-        run: gradle --no-daemon build
-
-      - name: Save JAR
-        uses: actions/upload-artifact@v4
-        with:
-          name: AutoEnchanter
-          path: build/libs/*.jar
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}
